@@ -1,14 +1,17 @@
+from typing import Any
+
+
 def render_json(
     response_id: str,
     output_text: str,
     model: str,
-    metadata: dict,
+    metadata: dict[Any, Any],
     temperature: float,
     input_tokens: int,
     output_tokens: int,
-    reasoning: str = None,
-    finish_reason: str = None,
-) -> dict:
+    reasoning: str | None,
+    finish_reason: str | None,
+) -> dict[str, Any]:
     return {
         "response_id": response_id,
         "model": model,
@@ -24,7 +27,26 @@ def render_json(
 
 class JSONStandardizer:
     @staticmethod
-    def openai_response(response: dict, model: str) -> dict:
+    def openai_response(response: dict[str, Any], model: str) -> dict[str, Any]:
+        usage = response.get("usage", {})
+        incomplete = response.get("incomplete_details") or {}
+        
+        outputs = response.get("output", [])
+        first_output = outputs[0] if outputs else {}
+
+        return render_json(
+            response_id=response.get("id", ""),
+            output_text=response.get("output_text", ""),
+            model=model,
+            metadata=response.get("metadata", {}),
+            temperature=response.get("temperature", 1.0),
+            input_tokens=usage.get("input_tokens", 0),
+            output_tokens=usage.get("output_tokens", 0),
+            reasoning=first_output.get("reasoning"),
+            finish_reason=incomplete.get("reason", "completed"),
+        )
+    @staticmethod
+    def gemini(response: dict[str, Any], model:str) -> dict[str, Any]:
         usage = response.get("usage", {})
         incomplete = response.get("incomplete_details") or {}
         
