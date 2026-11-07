@@ -27,8 +27,11 @@ exactly who did what, so nobody has to guess.
 ## Where AI changed the design
 
 Some decisions came out of arguing with the AI rather than from me alone. For example,
-block-based messages came from the design review, and I was talked out of a "two-stage"
-normalization in the adapters. Where that happened, the design docs say so.
+block-based messages came from the design review, and an early draft of mine had adapters
+talking to each other directly, which the review corrected: adapters only talk to the core.
+It went both ways: some of the AI's suggestions were wrong and I argued them out (per-node
+limits, Needle-generated tool-call ids). Where a decision came from the AI, the design docs
+say so.
 
 ## Why I work this way
 

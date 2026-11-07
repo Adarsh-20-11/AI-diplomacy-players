@@ -6,7 +6,7 @@
 
 ## Context
 
-During my read-through on the Anthropic, OpenAI and Gemini docs, I saw that most of the information returned via API calls are similr, just in different shapes. Following that, it's in the best interest of the project to somehow standardize this into particular structures which would be validated via Pydantic.
+During my read-through on the Anthropic, OpenAI and Gemini docs, I saw that most of the information returned via API calls are similar, just in different shapes. Following that, it's in the best interest of the project to somehow standardize this into particular structures which would be validated via Pydantic.
 
 **What Makes it Hard?**
 
@@ -75,6 +75,6 @@ The main issue I still think is the reasoning chain, it would be great if we cou
 2. If the reasoning object's structure is different -> (potentially solvable via another normalization)
 3. If the reasoning object uses a specific language which only works for that model.
 
-The adapter implementation is massive as well due to our current implementation. Each having their initial standardization, and then layer routing implies 2 stages of simplification, but the plus point is seamless integration, and the ability of each adapter being able to converse with the other.
+The adapter implementation is large as well, since every provider needs its own translator. Each response goes through two steps: translation into the canonical format inside the adapter, then routing of its parts (content, usage, telemetry) to their layers in the core. The plus point is seamless integration: every adapter speaks the same format to the core, so any model can pick up a conversation another one started. Adapters never talk to each other directly; everything goes through the core.
 
 Streaming, images and voice is out of scope for now, but lets see if I get enough time to implement the same in the future.
