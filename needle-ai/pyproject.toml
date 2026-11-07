@@ -6,8 +6,9 @@ name = "needle"
 version = "0.1"
 dependencies = [
                 "openai",
-                "google-genai"
-               ]
+                "google-genai",
+                "pydantic>=2.14.1",
+]
 requires-python = ">=3.12"
 authors = [
     {name = "Adarsh Anshul", email = "anshul.adarsh3@gmail.com"}

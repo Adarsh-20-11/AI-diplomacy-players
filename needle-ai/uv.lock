@@ -798,6 +798,7 @@ source = { editable = "." }
 dependencies = [
     { name = "google-genai" },
     { name = "openai" },
+    { name = "pydantic" },
 ]
 
 [package.dev-dependencies]
@@ -811,6 +812,7 @@ dev = [
 requires-dist = [
     { name = "google-genai" },
     { name = "openai" },
+    { name = "pydantic", specifier = ">=2.14.1" },
 ]
 
 [package.metadata.requires-dev]
