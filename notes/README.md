@@ -24,3 +24,12 @@ Open this `notes/` folder as a vault in Obsidian.
 - [[Virtual Environments]]
 - [[Linting vs Type Checking]]
 - [[Continuous Integration]]
+
+## Architecture notes (Phase 1 design)
+Created from the design discussion and review 01. Each has a "Discussion record (Claude)"
+section with what was discussed and decided; the "What it is" and "Tradeoff" sections are yours.
+- [[Hexagonal Architecture]], [[Anti-Corruption Layer]], [[Canonical Data Model]]
+- [[Stateless LLM Clients]], [[History vs Context View]], [[Failure Handling in Agents]]
+- [[Build Time vs Run Time]], [[Graph Validation]], [[Shared-State Graph vs Dataflow]]
+- [[Deciders and Stop Conditions]], [[Limits and Budgets]], [[Progressive Disclosure]]
+- [[Architecture Decision Records]], [[Vertical Slice]], [[Low-Level vs High-Level Design]]
