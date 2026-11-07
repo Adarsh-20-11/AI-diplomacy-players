@@ -15,7 +15,7 @@ class GeminiHelper(BaseLLMClient):
         self.api_key = api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
         if not self.api_key:
             raise ValueError(
-                "Missing Gemini API key. " \
+                "Missing Gemini API key. "
                 "Set GEMINI_API_KEY in your environment or pass it to the constructor."
             )
         self.client = genai.Client(api_key=self.api_key)
@@ -58,16 +58,18 @@ class GeminiHelper(BaseLLMClient):
                 if role == "system":
                     system_instruction = content
                 elif role == "user":
-                    formatted_contents.append(types.Content(role="user", 
-                                                        parts=[types.Part.from_text(text=content)]))
+                    formatted_contents.append(
+                        types.Content(role="user", parts=[types.Part.from_text(text=content)])
+                    )
                 elif role in ["assistant", "model"]:
-                    formatted_contents.append(types.Content(role="model", 
-                                                        parts=[types.Part.from_text(text=content)]))
+                    formatted_contents.append(
+                        types.Content(role="model", parts=[types.Part.from_text(text=content)])
+                    )
 
             config = (
-                      types.GenerateContentConfig(system_instruction=system_instruction) 
-                      if system_instruction 
-                      else None
+                types.GenerateContentConfig(system_instruction=system_instruction)
+                if system_instruction
+                else None
             )
 
             response = self.client.models.generate_content(
@@ -91,15 +93,17 @@ class GeminiHelper(BaseLLMClient):
                 if role == "system":
                     system_instruction = content
                 elif role == "user":
-                    formatted_contents.append(types.Content(role="user", 
-                                                        parts=[types.Part.from_text(text=content)]))
+                    formatted_contents.append(
+                        types.Content(role="user", parts=[types.Part.from_text(text=content)])
+                    )
                 elif role in ["assistant", "model"]:
-                    formatted_contents.append(types.Content(role="model", 
-                                                        parts=[types.Part.from_text(text=content)]))
+                    formatted_contents.append(
+                        types.Content(role="model", parts=[types.Part.from_text(text=content)])
+                    )
 
             config = (
-                types.GenerateContentConfig(system_instruction=system_instruction) 
-                if system_instruction 
+                types.GenerateContentConfig(system_instruction=system_instruction)
+                if system_instruction
                 else None
             )
 

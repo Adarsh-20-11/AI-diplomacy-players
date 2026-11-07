@@ -4,9 +4,9 @@ from typing import Any
 
 class BaseLLMClient(ABC):
     @abstractmethod
-    def invoke(self, prompt:str, user_input:str) -> dict[str, Any]:
+    def invoke(self, prompt: str, user_input: str) -> dict[str, Any]:
         pass
 
     @abstractmethod
-    async def ainvoke(self, prompt:str, user_input:str) -> dict[str, Any]:
+    async def ainvoke(self, prompt: str, user_input: str) -> dict[str, Any]:
         pass

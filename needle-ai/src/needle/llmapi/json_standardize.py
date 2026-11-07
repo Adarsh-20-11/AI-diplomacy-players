@@ -21,16 +21,17 @@ def render_json(
         "temperature": temperature,
         "reasoning": reasoning,
         "input_tokens": input_tokens,
-        "output_tokens": output_tokens, 
+        "output_tokens": output_tokens,
         "total_tokens": input_tokens + output_tokens,
     }
+
 
 class JSONStandardizer:
     @staticmethod
     def openai_response(response: dict[str, Any], model: str) -> dict[str, Any]:
         usage = response.get("usage", {})
         incomplete = response.get("incomplete_details") or {}
-        
+
         outputs = response.get("output", [])
         first_output = outputs[0] if outputs else {}
 
@@ -45,11 +46,12 @@ class JSONStandardizer:
             reasoning=first_output.get("reasoning"),
             finish_reason=incomplete.get("reason", "completed"),
         )
+
     @staticmethod
-    def gemini(response: dict[str, Any], model:str) -> dict[str, Any]:
+    def gemini(response: dict[str, Any], model: str) -> dict[str, Any]:
         usage = response.get("usage", {})
         incomplete = response.get("incomplete_details") or {}
-        
+
         outputs = response.get("output", [])
         first_output = outputs[0] if outputs else {}
 
