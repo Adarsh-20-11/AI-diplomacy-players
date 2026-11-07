@@ -1,6 +1,42 @@
-Needle AI is just a side project I am working on myself to improve the way AI development happens. I am also trying to self code it instead of using AI, just getting my code reviewed by AI but all human typed.
-I am aware that langchain, langgraph, crewAI, etc are countless possible options I could've utilized, but I wanted to make something from scratch to challenge myself.
+# needle
 
-Right now, all I know is that this would take time, and if anyone wants to contribute to this opensource development, reach out to me! We might add multiple connectors and checkpointers as well!
+A Python library for building AI agents from prebuilt patterns (ReAct, Reflection, ...) that
+you can eject into editable graphs.
 
-Alright that's it for now, I will keep adding to this as I develop more. For now, I have only created the base, openai and gemini helpers, but I might contribute more throughout the days.
+> **Status: pre-alpha.** Not on PyPI, and the API will change. Right now this package holds the
+> canonical message model and the early provider clients; the first working agent is still
+> being built.
+
+## What's here
+
+| Module | What it is |
+|---|---|
+| `needle.core.message` | The canonical message model: typed content blocks (text, tool call, tool result, reasoning) and `Message`, validated with Pydantic |
+| `needle.llmapi` | Early OpenAI and Gemini clients. They predate the current design and will be replaced by provider adapters |
+| `needle.ai` | Early wrapper and ReAct placeholder, also due to be replaced |
+
+```python
+from needle.core.message import Message, TextBlock
+
+msg = Message(role="user", content=[TextBlock(text="What's the weather in Pune?")])
+msg.model_dump_json()  # the same format, whichever provider the message goes to
+```
+
+## Development
+
+Requires [uv](https://docs.astral.sh/uv/) and Python 3.12+.
+
+```
+uv sync
+uv run ruff check
+uv run ruff format
+uv run mypy src
+uv run pytest
+```
+
+mypy runs in strict mode, and CI runs all checks on Python 3.12 and 3.13.
+
+## More
+
+The design, the ADRs and the project's background are in the
+[repository README](../README.md).
